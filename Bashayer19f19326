@@ -1,0 +1,50 @@
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from sklearn.model_selection import train_test_split
+import numpy as np
+import time
+import PIL.Image as Image
+import matplotlib.pylab as plt
+import matplotlib.image as mpimg
+%matplotlib inline
+import datetime
+from tqdm.keras import TqdmCallback
+from skimage import transform
+import urllib
+import os
+# tensorflow libraries
+import tensorflow as tf
+import tensorflow_hub as hub
+
+
+# path variables
+train_path = '/kaggle/input/timeofdaydataset'
+
+# define image shape & batch size
+batch_size = 64
+img_height = 224
+img_width = 224
+seed_train_validation = 1
+shuffle_value = True
+validation_split = 0.1
+# load training images
+train_ds = tf.keras.utils.image_dataset_from_directory(
+ train_path,
+ validation_split=validation_split,
+ subset="training",
+ image_size=(img_height, img_width),
+ batch_size=batch_size,
+ seed = seed_train_validation,
+ shuffle = shuffle_value )
+
+# load validation images
+val_ds = tf.keras.utils.image_dataset_from_directory(
+   train_path,
+   validation_split=validation_split,
+   subset="validation",
+   image_size=(img_height, img_width),
+   batch_size=batch_size,
+   seed = seed_train_validation,
+   shuffle = shuffle_value )
